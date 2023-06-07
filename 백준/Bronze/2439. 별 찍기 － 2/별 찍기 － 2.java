@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -8,12 +10,8 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         for(int i=0; i<n; i++) {
-            for(int j=n-1; j>i; j--) {
-                sb.append(" ");
-            }
-            for(int k=0; k<i+1; k++) {
-                sb.append("*");
-            }
+            sb.append(" ".repeat(Math.max(0, n - 1 - i)));
+            sb.append("*".repeat(i + 1));
             sb.append("\n");
         }
         System.out.println(sb);
