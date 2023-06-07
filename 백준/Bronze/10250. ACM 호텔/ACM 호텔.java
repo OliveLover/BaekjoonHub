@@ -1,31 +1,39 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        int T = Integer.parseInt(br.readLine());
-        int A = 1, B=1;
-        for (int i = 0; i < T; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            int H = Integer.parseInt(st.nextToken());
-            int W = Integer.parseInt(st.nextToken());
-            int N = Integer.parseInt(st.nextToken());
-        
-            
-            A = N%H;
-            B = N/H + 1;
-            
-            if (A == 0) {
-                A = H;
-                B -= 1;
+        StringBuilder sb = new StringBuilder();
+
+        int t = Integer.parseInt(br.readLine());
+
+        int h;
+        int w;
+        int n;
+
+        for(int i=0; i<t; i++) {
+            st = new StringTokenizer(br.readLine());
+            h = Integer.parseInt(st.nextToken());
+            w = Integer.parseInt(st.nextToken());
+            n = Integer.parseInt(st.nextToken());
+
+            int floor = n%h;
+            int room = n/h +1;
+
+            if(floor == 0) {
+                floor = h;
+                room = n/h;
             }
-            System.out.println(A*100 + B);
-            
-            
+
+            sb.append(floor).append("");
+
+            if(room < 10) sb.append("0").append(room).append("\n");
+            else sb.append(room).append("\n");
         }
+        System.out.println(sb);
     }
 }
