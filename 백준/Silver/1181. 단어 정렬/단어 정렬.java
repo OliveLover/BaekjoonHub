@@ -1,32 +1,36 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
+        Set<String> tmp = new HashSet<>();
 
-        List<String> sortList = new ArrayList<>();
+        for(int i = 0; i < N; i++)
+            tmp.add(br.readLine());
 
-        for(int i=0; i<n; i++) {
-            sortList.add(br.readLine());
-        }
-        sortList.stream().distinct().sorted(new Comparator<String>() {
+        List<String> answer = new ArrayList<>(tmp);
+        Collections.sort(answer, new Comparator<>() {
             @Override
             public int compare(String o1, String o2) {
-                if(o1.length()<o2.length()) {
+                if(o1.length() > o2.length())
+                    return 1;
+                else if (o1.length()< o2.length())
                     return -1;
+                else{
+                    for(int i = 0; i < o1.length(); i++){
+                        if(o1.charAt(i) > o2.charAt(i))
+                            return 1;
+                        if(o1.charAt(i) < o2.charAt(i))
+                            return -1;
+                    }
+                    return 0;
                 }
-                if(o1.length()==o2.length()) {
-                    return o1.compareTo(o2);
-                }
-                return 1;
             }
-        }).forEach(System.out::println);
+        });
+
+        answer.forEach(System.out::println);
     }
 }
