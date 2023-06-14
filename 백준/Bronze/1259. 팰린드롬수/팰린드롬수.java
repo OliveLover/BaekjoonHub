@@ -1,23 +1,15 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.StringBuilder;
-import java.util.StringTokenizer;
 import java.util.Stack;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String args[]) throws Exception {
-        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Scanner sc = new Scanner(System.in);
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        String strNum = br.readLine();
 
-        //String strNum = br.readLine();
-        String strNum = sc.nextLine();
-
-
-
-        while(true) {
-            if(strNum.equals("0")) break;
-
+        while(!strNum.equals("0")) {
             Stack<Character> stack = new Stack<>();
 
             int strNumLength = strNum.length();
@@ -33,12 +25,8 @@ public class Main {
                         stack.pop();
                     }
                 }
-                if(stack.isEmpty()) System.out.println("yes");
-                else System.out.println("no");
             } else {
                 int midIndex = strNumLength/2;
-                //System.out.println(strNumLength);
-                //System.out.println(midIndex);
                 for(int i=0; i<midIndex; i++) {
                     char n = strNum.charAt(i);
                     stack.push(n);
@@ -46,16 +34,16 @@ public class Main {
                 for(int i=midIndex+1; i<strNumLength; i++) {
                     char n = strNum.charAt(i);
                     if(stack.peek().equals(n)) {
-                        //System.out.println("peek :" + stack.peek());
                         stack.pop();
                     }
                 }
-                if(stack.isEmpty()) System.out.println("yes");
-                else System.out.println("no");
-                //System.out.println(stack.size());
             }
-            //strNum = br.readLine();
-            strNum = sc.nextLine();
+
+            if(stack.isEmpty()) sb.append("yes").append("\n");
+            else sb.append("no").append("\n");
+
+            strNum = br.readLine();
         }
+        System.out.print(sb);
     }
 }
