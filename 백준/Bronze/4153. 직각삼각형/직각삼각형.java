@@ -1,35 +1,33 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int a;
-        int b;
-        int c;
+        StringBuilder sb = new StringBuilder();
 
-        do {
-            int[] triangleSide = new int[3];
-            triangleSide[0] = scanner.nextInt();
-            triangleSide[1] = scanner.nextInt();
-            triangleSide[2] = scanner.nextInt();
+        while(true) {
+            int[] arr = new int[3];
 
-            Arrays.sort(triangleSide);
-
-            a = triangleSide[0];
-            b = triangleSide[1];
-            c = triangleSide[2];
-
-            if(a==0 && b == 0 && c == 0) break;
-
-            if (a * a + b * b == c * c) {
-                System.out.println("right");
-            } else {
-                System.out.println("wrong");
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            for(int i = 0; i < 3; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
             }
 
-        } while (a != 0 && b != 0 && c != 0);
+            if(arr[0] == 0 && arr[1] == 0 && arr[2] == 0) break;
+            Arrays.sort(arr);
+
+            boolean result = arr[0] * arr[0] + arr[1] * arr[1] == arr[2] * arr[2];
+            if(result) sb.append("right").append("\n");
+            else sb.append("wrong").append("\n");
+
+        }
+
+        System.out.print(sb);
 
     }
 }
