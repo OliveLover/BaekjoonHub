@@ -21,14 +21,11 @@ public class Main {
             numList.get(i).add(Integer.parseInt(st.nextToken()));
         }
 
-        numList.sort(new Comparator<List<Integer>>() {
-            @Override
-            public int compare(List<Integer> o1, List<Integer> o2) {
-                if(Objects.equals(o1.get(0), o2.get(0))) {
-                    return o1.get(1).compareTo(o2.get(1));
-                }
-                return o1.get(0).compareTo(o2.get(0));
+        numList.sort((o1, o2) -> {
+            if(Objects.equals(o1.get(0), o2.get(0))) {
+                return o1.get(1).compareTo(o2.get(1));
             }
+            return o1.get(0).compareTo(o2.get(0));
         });
 
         for(int i = 0; i < n; i++) {
