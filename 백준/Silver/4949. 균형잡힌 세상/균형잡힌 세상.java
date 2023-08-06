@@ -18,24 +18,19 @@ public class Main {
 
             for (int i = 0; i < sentenceLength; i++) {
                 char word = sentence.charAt(i);
-                if(!(word == '(' || word == '{' || word == '[' || word == ')' || word == '}' || word == ']')) continue;
-                
-                if(word == ')' && !bracketStack.isEmpty() && bracketStack.peek() == '(') {
-                    bracketStack.pop();
-                } else if (word == '}' && !bracketStack.isEmpty() && bracketStack.peek() == '{') {
-                    bracketStack.pop();
-                } else if (word == ']' && !bracketStack.isEmpty() && bracketStack.peek() == '[') {
-                    bracketStack.pop();
-                } else {
-                    bracketStack.push(word);
-                }
+
+                if (!(word == '(' || word == '{' || word == '[' || word == ')' || word == '}' || word == ']')) continue;
+
+                if (word == ')' && !bracketStack.isEmpty() && bracketStack.peek() == '(') bracketStack.pop();
+                else if (word == '}' && !bracketStack.isEmpty() && bracketStack.peek() == '{') bracketStack.pop();
+                else if (word == ']' && !bracketStack.isEmpty() && bracketStack.peek() == '[') bracketStack.pop();
+                else bracketStack.push(word);
             }
-            
+
             if (bracketStack.isEmpty())
                 sb.append("yes").append("\n");
             else sb.append("no").append("\n");
-
-
+            
         }
         System.out.println(sb);
     }
