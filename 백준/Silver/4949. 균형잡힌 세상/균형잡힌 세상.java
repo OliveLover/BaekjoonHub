@@ -12,26 +12,37 @@ public class Main {
 
         String sentence = "";
         while (!Objects.equals(sentence = br.readLine(), ".")) {
+            String answer;
             bracketStack = new Stack<>();
 
-            int sentenceLength = sentence.length();
+            answer = bracketBalanceCheck(bracketStack, sentence);
 
-            for (int i = 0; i < sentenceLength; i++) {
-                char word = sentence.charAt(i);
-
-                if (!(word == '(' || word == '{' || word == '[' || word == ')' || word == '}' || word == ']')) continue;
-
-                if (word == ')' && !bracketStack.isEmpty() && bracketStack.peek() == '(') bracketStack.pop();
-                else if (word == '}' && !bracketStack.isEmpty() && bracketStack.peek() == '{') bracketStack.pop();
-                else if (word == ']' && !bracketStack.isEmpty() && bracketStack.peek() == '[') bracketStack.pop();
-                else bracketStack.push(word);
-            }
-
-            if (bracketStack.isEmpty())
-                sb.append("yes").append("\n");
-            else sb.append("no").append("\n");
+            sb.append(answer).append("\n");
             
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
+
+    public static String bracketBalanceCheck (Stack<Character> bracketStack, String sentence) {
+        String answer;
+        int sentenceLength = sentence.length();
+
+        for (int i = 0; i < sentenceLength; i++) {
+            char word = sentence.charAt(i);
+
+            if (!(word == '(' || word == '{' || word == '[' || word == ')' || word == '}' || word == ']')) continue;
+
+            if (word == ')' && !bracketStack.isEmpty() && bracketStack.peek() == '(') bracketStack.pop();
+            else if (word == '}' && !bracketStack.isEmpty() && bracketStack.peek() == '{') bracketStack.pop();
+            else if (word == ']' && !bracketStack.isEmpty() && bracketStack.peek() == '[') bracketStack.pop();
+            else bracketStack.push(word);
+        }
+
+        if (bracketStack.isEmpty())
+            answer = "yes";
+        else answer = "no";
+
+        return answer;
+    }
+
 }
