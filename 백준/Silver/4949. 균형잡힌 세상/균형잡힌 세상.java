@@ -18,7 +18,7 @@ public class Main {
             answer = bracketBalanceCheck(bracketStack, sentence);
 
             sb.append(answer).append("\n");
-            
+
         }
         System.out.print(sb);
     }
@@ -38,9 +38,7 @@ public class Main {
             else bracketStack.push(word);
         }
 
-        if (bracketStack.isEmpty())
-            answer = "yes";
-        else answer = "no";
+        answer = bracketStack.isEmpty() ? "yes" : "no";
 
         return answer;
     }
