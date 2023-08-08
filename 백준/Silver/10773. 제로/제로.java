@@ -19,16 +19,9 @@ public class Main {
             n--;
         }
 
-        int numStackSize = numStack.size();
-        int[] numArr = new int[numStackSize];
-        for(int i = numStackSize - 1; i >= 0; i--) {
-            numArr[i] = numStack.pop();
-        }
-
         int sum = 0;
-        int arrLen = numArr.length;
-        for(int i = 0; i < arrLen; i++) {
-            sum += numArr[i];
+        for(int j : numStack) {
+            sum += j;
         }
 
         System.out.println(sum);
