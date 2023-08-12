@@ -34,15 +34,7 @@ public class Main {
             min = Math.min(check[i], min);
         }
 
-        if (min != 0) {
-            for (int i = 0; i < m; i++) {
-                check[i] = check[i] - min;
-            }
-
-            for (int i = 0; i < n; i++) {
-                cards[i] = cards[i] - min;
-            }
-        }
+        performNormalization(check, cards, min);
 
         int range = max - min + 1;
         int[] idxArr = new int[range];
@@ -57,5 +49,19 @@ public class Main {
 
         System.out.println(sb);
 
+    }
+
+    private static void performNormalization(int[] arr1, int[] arr2, int min) {
+        int arr1Length = arr1.length;
+        int arr2Length = arr2.length;
+        if (min != 0) {
+            for (int i = 0; i < arr1Length; i++) {
+                arr1[i] = arr1[i] - min;
+            }
+
+            for (int i = 0; i < arr2Length; i++) {
+                arr2[i] = arr2[i] - min;
+            }
+        }
     }
 }
