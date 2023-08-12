@@ -34,17 +34,7 @@ public class Main {
             if (check[i] < min) min = check[i];
         }
 
-        if (min < 0) {
-            for (int i = 0; i < m; i++) {
-                check[i] = check[i] - min;
-            }
-
-            for (int i = 0; i < n; i++) {
-                cards[i] = cards[i] - min;
-            }
-        }
-
-        if (min > 0) {
+        if (min != 0) {
             for (int i = 0; i < m; i++) {
                 check[i] = check[i] - min;
             }
