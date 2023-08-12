@@ -18,8 +18,8 @@ public class Main {
         for (int i = 0; i < n; i++) {
             cards[i] = Integer.parseInt(st.nextToken());
 
-            if (cards[i] > max) max = cards[i];
-            if (cards[i] < min) min = cards[i];
+            max = Math.max(cards[i], max);
+            min = Math.min(cards[i], min);
         }
 
         int m = Integer.parseInt(br.readLine());
@@ -30,8 +30,8 @@ public class Main {
         for (int i = 0; i < m; i++) {
             check[i] = Integer.parseInt(st.nextToken());
 
-            if (check[i] > max) max = check[i];
-            if (check[i] < min) min = check[i];
+            max = Math.max(check[i], max);
+            min = Math.min(check[i], min);
         }
 
         if (min != 0) {
@@ -44,7 +44,7 @@ public class Main {
             }
         }
 
-        int range = Math.abs(max - min + 1);
+        int range = max - min + 1;
         int[] idxArr = new int[range];
 
         for (int card : cards) {
