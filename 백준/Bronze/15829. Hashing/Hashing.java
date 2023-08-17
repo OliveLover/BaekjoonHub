@@ -9,15 +9,15 @@ public class Main {
         int n = Integer.parseInt(br.readLine());
         String str = br.readLine();
 
-        int sum = 0;
+        long sum = 0;
         int r = 31;
         int m = 1234567891;
         for (int i = 0; i < n; i++) {
-            int word = str.charAt(i) - 'a' + 1;
-            sum += word * Math.pow(r, i);
+            long word = str.charAt(i) - 'a' + 1L;
+            sum += word * Math.pow(r, i) ;
         }
 
-        int result = sum % m;
+        long result = sum % m;
 
         System.out.println(result);
     }
