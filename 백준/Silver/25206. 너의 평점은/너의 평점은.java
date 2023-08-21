@@ -13,7 +13,7 @@ public class Main {
         for (int i = 0; i < 20; i++) {
             st = new StringTokenizer(br.readLine());
 
-            String subjectName = st.nextToken();
+            st.nextToken();
             double credit = Double.parseDouble(st.nextToken());
             String grade = st.nextToken();
             double gradeScore;
