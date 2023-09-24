@@ -1,61 +1,59 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Main {
-    static ArrayList<Integer>[] A;
-    static boolean[] visited;
-    static boolean arrive = false;
+  static boolean arrive;
+  static List<List<Integer>> relation;
+  static boolean[] visited;
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+    
+    relation = new ArrayList<>(m);
+    visited = new boolean[n];
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < n; i++) relation.add(new ArrayList<>());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+    for (int i = 0; i < m; i++) {
+      st = new StringTokenizer(br.readLine());
 
-        A = new ArrayList[n + 1];
-        visited = new boolean[n + 1];
+      int a = Integer.parseInt(st.nextToken());
+      int b = Integer.parseInt(st.nextToken());
 
-        for (int i = 0; i < n + 1; i++) {
-            A[i] = new ArrayList<>();
-        }
-
-        for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(br.readLine());
-
-            int s = Integer.parseInt(st.nextToken());
-            int e = Integer.parseInt(st.nextToken());
-
-            A[s].add(e);
-            A[e].add(s);
-        }
-
-        for (int i = 0; i < n + 1; i++) {
-            DFS(i, 1);
-
-            if (arrive) break;
-        }
-
-        System.out.println(arrive ? 1 : 0);
+      relation.get(a).add(b);
+      relation.get(b).add(a);
     }
 
-    static void DFS(int v, int depth) {
-        if (depth == 5 || arrive) {
-            arrive = true;
-            return;
-        }
+    for (int i = 0; i < m; i++) {
+      DFS(i, 1);
 
-        visited[v] = true;
-
-        for (int i : A[v]) {
-            if (!visited[i]) {
-                DFS(i, depth + 1);
-            }
-        }
-
-        visited[v] = false;
+      if (arrive) break;
     }
+
+    if (arrive) System.out.println(1);
+    else System.out.println(0);
+  }
+
+  private static void DFS(int v, int count) {
+    if (count == 5) {
+      arrive = true; 
+      return;
+    }
+    
+    visited[v] = true;
+
+    for (int i : relation.get(v)) {
+      if (!visited[i]) DFS(i, count + 1);
+    }
+
+    visited[v] = false;
+  }
+  
 }
