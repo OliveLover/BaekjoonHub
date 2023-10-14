@@ -12,9 +12,7 @@ public class Main {
         int[] dx = new int[3];
         int[] dy = new int[3];
 
-        int countMinX = 0;
         int countMaxX = 0;
-        int countMinY = 0;
         int countMaxY = 0;
 
 
@@ -40,9 +38,7 @@ public class Main {
         }
 
         for (int i = 0; i < 3; i++) {
-            if (minX == dx[i]) countMinX++;
             if (maxX == dx[i]) countMaxX++;
-            if (minY == dy[i]) countMinY++;
             if (maxY == dy[i]) countMaxY++;
         }
 
