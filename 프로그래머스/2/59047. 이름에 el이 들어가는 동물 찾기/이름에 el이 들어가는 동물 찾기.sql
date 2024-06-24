@@ -1,0 +1,6 @@
+SELECT  a.ANIMAL_ID
+      , a.NAME
+  FROM ANIMAL_INS a
+ WHERE a.ANIMAL_TYPE = 'DOG'
+       AND a.NAME LIKE '%EL%'
+ ORDER BY 2;
