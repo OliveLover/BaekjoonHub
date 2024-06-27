@@ -1,0 +1,6 @@
+SELECT   a.MCDP_CD AS '진료과코드'
+       , COUNT(DATE_FORMAT(a.APNT_YMD, '%Y-%m')) AS '5월예약건수'
+  FROM APPOINTMENT a
+ WHERE DATE_FORMAT(a.APNT_YMD, '%Y-%m') = '2022-05'
+ GROUP BY a.MCDP_CD, DATE_FORMAT(a.APNT_YMD, '%Y-%m')
+ ORDER BY 2, 1;
