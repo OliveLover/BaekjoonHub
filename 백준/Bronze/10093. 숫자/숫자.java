@@ -9,8 +9,8 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        long first = Integer.parseInt(st.nextToken());
-        long second = Integer.parseInt(st.nextToken());
+        long first = Long.parseLong(st.nextToken());
+        long second = Long.parseLong(st.nextToken());
 
         long range1 = Math.min(first, second);
         long range2 = Math.max(first, second);
