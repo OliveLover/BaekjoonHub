@@ -1,13 +1,12 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class Main {
   static int n;
-  static List<Long> numList = new ArrayList<>();
+  static ArrayList<Integer> primeList = new ArrayList<>();
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder sb = new StringBuilder();
@@ -18,24 +17,29 @@ public class Main {
     DFS(5);
     DFS(7);
 
-    for (long num : numList) sb.append(num).append("\n");
-
+    primeList.stream().forEach(num -> sb.append(num).append("\n"));
     System.out.print(sb);
   }
 
-  private static void DFS(long num) {
-    if (n == String.valueOf(num).length()) numList.add(num);
-    else {
-      for (int i = 1; i < 10; i += 2) {
-        if(isPrime(10*num + i))
-        DFS(10*num + i);
+  static void DFS(int number) {
+    if (n == String.valueOf(number).length()) {
+      primeList.add(number);
+      return;
+    }
+
+    for (int i = 1; i < 10; i++) {
+      if (i % 2 != 0) {
+        if (isPrime(number * 10 + i)) {
+          DFS(number * 10 + i);
+        }
       }
     }
   }
 
-  private static boolean isPrime(long num) {
-    for (long i = 2; i < (num / 2) + 1L; i++) {
-      if(num % i == 0) return false;
+  static boolean isPrime(int number) {
+    for (int i = 2; i <= (int)Math.sqrt(number); i++) {
+      if (number % i == 0)
+        return false;
     }
     return true;
   }
