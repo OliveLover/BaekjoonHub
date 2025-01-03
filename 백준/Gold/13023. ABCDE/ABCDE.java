@@ -16,9 +16,9 @@ public class Main {
     int n = Integer.parseInt(st.nextToken());
     int m = Integer.parseInt(st.nextToken());
 
+    FRIENDLIST = new ArrayList[n];
+    VISITED = new boolean[n];
     ARRIVE = false;
-    FRIENDLIST = new ArrayList[n + 1];
-    VISITED = new boolean[n + 1];
 
     for (int i = 0; i < n; i++) {
       FRIENDLIST[i] = new ArrayList<>();
@@ -36,9 +36,11 @@ public class Main {
 
     for (int i = 0; i < n; i++) {
       DFS(i, 1);
+
       if (ARRIVE)
         break;
     }
+
     if (ARRIVE)
       System.out.println("1");
     else
@@ -46,16 +48,19 @@ public class Main {
   }
 
   static void DFS(int now, int depth) {
-    if(depth == 5 || ARRIVE) {
+    if (depth == 5 || ARRIVE) {
       ARRIVE = true;
       return;
     }
+
     VISITED[now] = true;
+
     for (int i : FRIENDLIST[now]) {
       if (!VISITED[i]) {
         DFS(i, depth + 1);
       }
     }
+
     VISITED[now] = false;
   }
 }
