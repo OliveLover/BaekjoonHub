@@ -1,59 +1,61 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.ArrayList;
 
 public class Main {
-  static boolean arrive;
-  static List<List<Integer>> relation;
-  static boolean[] visited;
+  static ArrayList<Integer>[] FRIENDLIST;
+  static boolean[] VISITED;
+  static boolean ARRIVE;
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringTokenizer st = new StringTokenizer(br.readLine());
-    
+
     int n = Integer.parseInt(st.nextToken());
     int m = Integer.parseInt(st.nextToken());
-    
-    relation = new ArrayList<>(m);
-    visited = new boolean[n];
 
-    for (int i = 0; i < n; i++) relation.add(new ArrayList<>());
+    ARRIVE = false;
+    FRIENDLIST = new ArrayList[n + 1];
+    VISITED = new boolean[n + 1];
+
+    for (int i = 0; i < n; i++) {
+      FRIENDLIST[i] = new ArrayList<>();
+    }
 
     for (int i = 0; i < m; i++) {
       st = new StringTokenizer(br.readLine());
 
-      int a = Integer.parseInt(st.nextToken());
-      int b = Integer.parseInt(st.nextToken());
+      int u = Integer.parseInt(st.nextToken());
+      int v = Integer.parseInt(st.nextToken());
 
-      relation.get(a).add(b);
-      relation.get(b).add(a);
+      FRIENDLIST[u].add(v);
+      FRIENDLIST[v].add(u);
     }
 
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < n; i++) {
       DFS(i, 1);
-
-      if (arrive) break;
+      if (ARRIVE)
+        break;
     }
-
-    if (arrive) System.out.println(1);
-    else System.out.println(0);
+    if (ARRIVE)
+      System.out.println("1");
+    else
+      System.out.println("0");
   }
 
-  private static void DFS(int v, int count) {
-    if (count == 5) {
-      arrive = true; 
+  static void DFS(int now, int depth) {
+    if(depth == 5 || ARRIVE) {
+      ARRIVE = true;
       return;
     }
-    
-    visited[v] = true;
-
-    for (int i : relation.get(v)) {
-      if (!visited[i]) DFS(i, count + 1);
+    VISITED[now] = true;
+    for (int i : FRIENDLIST[now]) {
+      if (!VISITED[i]) {
+        DFS(i, depth + 1);
+      }
     }
-
-    visited[v] = false;
+    VISITED[now] = false;
   }
-  
 }
