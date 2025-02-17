@@ -11,43 +11,42 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-
         int n = Integer.parseInt(br.readLine());
 
         A = new ArrayList[n + 1];
+
         for (int i = 1; i < n + 1; i++) {
             A[i] = new ArrayList<>();
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n + 1; i++) {
             st = new StringTokenizer(br.readLine());
 
-            int v = Integer.parseInt(st.nextToken());
+            int node = Integer.parseInt(st.nextToken());
 
-            while (true) {
-                int e = Integer.parseInt(st.nextToken());
-                if (e == -1) break;
+            while(true) {
+                int v = Integer.parseInt(st.nextToken());
+                if (v == -1) break;
 
                 int value = Integer.parseInt(st.nextToken());
-                A[v].add(new Edge(e, value));
+
+                A[node].add(new Edge(v, value));
             }
         }
 
-        distance = new int[n + 1];
         visited = new boolean[n + 1];
-
+        distance = new int[n + 1];
         BFS(1);
 
-        int max = 1;
+        int maxIndex = 1;
 
-        for (int i = 2; i <= n; i++) {
-            if (distance[max] < distance[i]) max = i;
+        for (int i = 1; i < n + 1; i++) {
+            if (distance[maxIndex] < distance[i]) maxIndex = i;
         }
 
-        distance = new int[n + 1];
         visited = new boolean[n + 1];
-
-        BFS(max);
+        distance = new int[n + 1];
+        BFS(maxIndex);
 
         Arrays.sort(distance);
         System.out.println(distance[n]);
@@ -60,25 +59,28 @@ public class Main {
 
         while (!queue.isEmpty()) {
             int now = queue.poll();
+
             for (Edge i : A[now]) {
-                int e = i.e;
+                int v = i.v;
                 int value = i.value;
-                if (!visited[e]) {
-                    visited[e] = true;
-                    queue.add(e);
-                    distance[e] = distance[now] + value;
+
+                if (!visited[v]) {
+                    visited[v] = true;
+                    queue.offer(v);
+                    distance[v] = distance[now] + value;
                 }
             }
         }
     }
 
     static class Edge {
-        int e;
+        int v;
         int value;
 
-        public Edge(int e, int value) {
-            this.e = e;
+        public Edge(int v, int value) {
+            this.v = v;
             this.value = value;
         }
     }
+
 }
