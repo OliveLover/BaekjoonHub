@@ -1,5 +1,5 @@
-SELECT   a.ANIMAL_ID
-       , a.NAME
-       , DATE_FORMAT(a.DATETIME, '%Y-%m-%d') AS '날짜'
-  FROM ANIMAL_INS a
- ORDER BY 1;
+SELECT   ANIMAL_ID
+       , NAME
+       , DATE_FORMAT(DATETIME, "%Y-%m-%d") AS '날짜'
+  FROM ANIMAL_INS
+ ORDER BY ANIMAL_ID;
