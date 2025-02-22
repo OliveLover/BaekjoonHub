@@ -1,56 +1,59 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Main {
-    static int[] dx = {0, 1, 0, -1};
-    static int[] dy = {1, 0, -1, 0};
-    static int[][] maze;
-    static boolean[][] visited;
+    static int[] DX = new int[] {1, 0, -1, 0};
+    static int[] DY = new int[] {0, 1, 0, -1};
+    static boolean[][] VISITED;
+    static int[][] DEPTH;
     static int n, m;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        maze = new int[n][m];
-        visited = new boolean[n][m];
+        DEPTH = new int[n][m];
+        VISITED = new boolean[n][m];
 
         for (int i = 0; i < n; i++) {
-            String number = br.readLine();
+            st = new StringTokenizer(br.readLine());
+
+            String line = st.nextToken();
             for (int j = 0; j < m; j++) {
-                maze[i][j] = number.charAt(j) - '0';
+                DEPTH[i][j] = Integer.parseInt(line.substring(j, j+1));
             }
         }
 
         BFS(0, 0);
 
-        System.out.println(maze[n - 1][m - 1]);
+        System.out.println(DEPTH[n - 1][m - 1]);
+        br.close();
     }
 
-    private static void BFS(int i, int j) {
+    static void BFS(int i, int j) {
         Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{i, j});
-        visited[i][j] = true;
+        queue.add(new int[] {i, j});
+        VISITED[i][j] = true;
 
-        while (!queue.isEmpty()) {
-            int[] now = queue.poll();
+        while(!queue.isEmpty()) {
+            int[] nowNode = queue.poll();
 
             for (int k = 0; k < 4; k++) {
-                int x = now[0] + dx[k];
-                int y = now[1] + dy[k];
+                int x = nowNode[0] + DX[k];
+                int y = nowNode[1] + DY[k];
 
-                if (x >= 0 && y >= 0 && n > x && m > y) {
-                    if (maze[x][y] != 0 && !visited[x][y]) {
-                        visited[x][y] = true;
-                        maze[x][y] = maze[now[0]][now[1]] + 1;
-                        queue.offer(new int[] {x, y});
+                if (x >= 0 && y >= 0 && x < n && y < m) {
+                    if (!VISITED[x][y] && DEPTH[x][y] != 0){
+                        VISITED[x][y] = true;
+                        DEPTH[x][y] = DEPTH[nowNode[0]][nowNode[1]] + 1;
+                        queue.add(new int[] {x, y});
                     }
                 }
             }
