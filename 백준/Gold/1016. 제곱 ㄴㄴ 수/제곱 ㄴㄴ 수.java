@@ -10,13 +10,12 @@ public class Main {
         long min = Long.parseLong(st.nextToken());
         long max = Long.parseLong(st.nextToken());
 
-        boolean[] check = new boolean[(int) (max - min + 1)];
+        boolean[] check = new boolean[(int) (max - min) + 1];
 
         for (long i = 2; i * i <= max; i++) {
             long pow = i * i;
 
             long startIndex = Math.max(pow, (min + pow - 1) / pow * pow);
-
             for (long j = startIndex; j <= max; j += pow) {
                 check[(int) (j - min)] = true;
             }
