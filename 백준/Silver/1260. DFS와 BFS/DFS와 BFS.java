@@ -1,92 +1,82 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
-  static ArrayList<Integer>[] A;
-  static StringBuilder sb = new StringBuilder();
-  static boolean[] VISITED;
-  static ArrayList<Integer> DFS = new ArrayList<>();
-  static ArrayList<Integer> BFS = new ArrayList<>();
-  
-  public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringTokenizer st = new StringTokenizer(br.readLine());
-    int n = Integer.parseInt(st.nextToken());
-    int m = Integer.parseInt(st.nextToken());
-    int s = Integer.parseInt(st.nextToken());
+    static ArrayList<Integer>[] A;
+    static boolean[] VISITED;
+    static StringBuilder sb = new StringBuilder();
 
-    A = new ArrayList[n + 1];
-    VISITED = new boolean[n + 1];
 
-    for (int i = 1; i < n + 1; i++) {
-      A[i] = new ArrayList<Integer>();
-    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        int v = Integer.parseInt(st.nextToken());
 
-    for (int i = 0; i < m; i++) {
-      st = new StringTokenizer(br.readLine());
+        A = new ArrayList[n + 1];
 
-      int u = Integer.parseInt(st.nextToken());
-      int v = Integer.parseInt(st.nextToken());
-
-      A[u].add(v);
-      A[v].add(u);
-    }
-
-    for (int i = 1; i < n + 1; i++) {
-      Collections.sort(A[i]);
-    }
-
-    DFS(s);
-    VISITED = new boolean[n + 1];
-    BFS(s);
-
-    for (int i : DFS) {
-      sb.append(i).append(" ");
-    }
-
-    sb.append("\n");
-
-    for (int i : BFS) {
-      sb.append(i).append(" ");
-    }
-    
-    System.out.println(sb);
-  }
-
-  static void DFS(int Node) {
-    if (VISITED[Node]) {
-      return;
-    }
-
-    VISITED[Node] = true;
-    DFS.add(Node);
-    
-    for (int i : A[Node]) {
-      DFS(i);
-    }
-  }
-
-  static void BFS(int Node) {
-    Queue<Integer> queue = new LinkedList<>();
-    queue.add(Node);
-    VISITED[Node] = true;
-
-    while (!queue.isEmpty()) {
-      int nowNode = queue.poll();
-      BFS.add(nowNode);
-      for (int i : A[nowNode]) {
-        if (!VISITED[i]) {
-          VISITED[i] = true;
-          queue.add(i);
+        for (int i = 1; i < n + 1; i++) {
+            A[i] = new ArrayList<>();
         }
-      }
+
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(br.readLine());
+
+            int e = Integer.parseInt(st.nextToken());
+            int u = Integer.parseInt(st.nextToken());
+
+            A[e].add(u);
+            A[u].add(e);
+        }
+
+        for (int i = 1; i < n + 1; i++) {
+            Collections.sort(A[i]);
+        }
+
+        VISITED = new boolean[n + 1];
+        DFS(v);
+
+        sb.append("\n");
+
+        VISITED = new boolean[n + 1];
+        BFS(v);
+
+        System.out.println(sb);
+        br.close();
     }
-  }
+
+    static void DFS(int w) {
+        sb.append(w).append(" ");
+
+        VISITED[w] = true;
+
+        for (int i : A[w]) {
+            if (!VISITED[i]) {
+                DFS(i);
+            }
+        }
+    }
+
+    static void BFS(int w) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(w);
+        VISITED[w] = true;
+        sb.append(w).append(" ");
+
+        while (!queue.isEmpty()) {
+            int now = queue.poll();
+
+            for (int i : A[now]) {
+                if (!VISITED[i]) {
+                    VISITED[i] = true;
+                    sb.append(i).append(" ");
+                    queue.add(i);
+                }
+            }
+        }
+    }
+
 }
