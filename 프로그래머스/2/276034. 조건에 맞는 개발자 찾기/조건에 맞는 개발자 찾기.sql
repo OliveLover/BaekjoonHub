@@ -4,9 +4,9 @@ SELECT   d.ID
        , d.LAST_NAME
   FROM DEVELOPERS d
  WHERE EXISTS (
-                    SELECT 1
-                      FROM SKILLCODES s
-                     WHERE (s.CODE & d.SKILL_CODE) != 0
-                       AND (s.NAME = 'Python' OR s.NAME = 'C#')
+                SELECT 1
+                  FROM SKILLCODES s
+                 WHERE (d.SKILL_CODE & s.CODE) != 0
+                       AND s.NAME IN ('C#', 'Python')
               )
  ORDER BY d.ID;
