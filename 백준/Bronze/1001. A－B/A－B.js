@@ -1,18 +1,7 @@
-const readline = require('readline');
+const fs = require('fs');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const data = fs.readFileSync(0, 'utf8').trim();
 
-rl.on('line', function(line) {
-  const input = line.split(' ');
-  const a = Number(input[0]);
-  const b = Number(input[1]);
+const [a, b] = data.split(' ').map(Number);
 
-  const result = a - b;
-
-  console.log(result);
-
-  rl.close();
-});
+console.log(a - b);
