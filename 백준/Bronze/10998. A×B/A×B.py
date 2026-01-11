@@ -1,2 +1,7 @@
-A, B = input().split()
-print(int(A)*int(B))
+import sys
+
+line = sys.stdin.readline
+
+a, b = map(int, line().split())
+
+print(a * b)
