@@ -1,12 +1,10 @@
 #include <stdio.h>
 
-int main(void) {
-  int y, result;
+int main() {
+    int year = 0;
 
-  scanf("%d", &y);
-
-  result = y - 543;
-  printf("%d", result);
-  
-  return 0;
+    scanf("%d", &year);
+    printf("%d", year - 543);
+    
+    return 0;
 }
