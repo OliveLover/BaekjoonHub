@@ -1,14 +1,5 @@
-const readline = require('readline');
+const fs = require('fs');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const username = fs.readFileSync(0, 'utf8').trim();
 
-rl.on('line', function(line) {
-  const input = line.split(' ');
-
-  console.log(input[0] + '??!');
-
-  rl.close();
-});
+console.log(username + "??!");
