@@ -1,16 +1,5 @@
-const readline = require('readline');
+const fs = require('fs');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const year = Number(fs.readFileSync(0, 'utf8'));
 
-rl.on('line', function(line) {
-  const input = line.split(' ');
-  const y = input[0];
-  const result = y - 543;
-
-  console.log(result);
-
-  rl.close();
-});
+console.log(year - 543);
