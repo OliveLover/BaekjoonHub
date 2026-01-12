@@ -1,20 +1,12 @@
-const readline = require('readline');
+const fs = require('fs');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const line = fs.readFileSync(0, 'utf8').trim();
+const [a, b, c] = line.split(' ').map(Number);
 
-rl.on('line', function(line) {
-  const input = line.split(" ");
-  const a = Number(input[0]);
-  const b = Number(input[1]);
-  const c = Number(input[2]);
+let answer = "";
+answer += `${(a + b) % c}\n`;
+answer += `${((a % c) + (b % c)) % c}\n`;
+answer += `${(a * b) % c}\n`;
+answer += `${((a % c) * (b % c)) % c}`;
 
-  console.log((a + b) % c);
-  console.log(((a % c) + (b % c)) % c);
-  console.log((a * b) % c);
-  console.log(((a % c) * (b % c)) % c);
-
-  rl.close();
-});
+console.log(answer);
