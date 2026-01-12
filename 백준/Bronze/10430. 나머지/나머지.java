@@ -6,14 +6,18 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int A = Integer.parseInt(st.nextToken());
-        int B = Integer.parseInt(st.nextToken());
-        int C = Integer.parseInt(st.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        System.out.println((A+B)%C);
-        System.out.println( ((A%C) + (B%C))%C);
-        System.out.println((A*B)%C);
-        System.out.println(((A%C) * (B%C))%C);
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+
+        sb.append((a + b) % c).append("\n")
+          .append(((a % c) + (b % c)) % c).append("\n")
+          .append((a * b) % c).append("\n")
+          .append(((a % c) * (b % c)) %c);
+
+        System.out.println(sb);
     }
 }
