@@ -4,22 +4,33 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String [] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
-        int H = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int C = Integer.parseInt(br.readLine());
-        int m = M + C;
+        int hours = Integer.parseInt(st.nextToken());
+        int minutes = Integer.parseInt(st.nextToken());
+        int timer = Integer.parseInt(br.readLine());
 
-        if (m >= 60) {
-            H += m/60;
-            m %= 60;
-            if (H >= 24) {
-                H -= 24;
-            }
+        br.close();
+
+        int addHours = timer / 60;
+        int addMinutes = timer % 60;
+
+        hours += addHours;
+        minutes += addMinutes;
+        
+        if (minutes >= 60) {
+            hours += 1;
+            minutes %= 60;
         }
-        System.out.println(H + " "+ m);
+
+        if (hours >= 24) {
+            hours %= 24;
+        }
+
+        sb.append(hours).append(" ").append(minutes);
+        System.out.println(sb);
     }
 }
