@@ -1,10 +1,6 @@
 const fs = require('fs');
 
 const n = Number(fs.readFileSync('/dev/stdin').toString().trim());
-let result = 0;
-
-for (var i = 1; i <= n; i++) {
-    result += i;
-}
+let result = n * (1 + n) / 2;
 
 console.log(result);
